@@ -53,6 +53,8 @@ BlueprintImplementableEvent 은 블루프린트에서 구현해야함- 함수
  호출 하려면 UFUNCTION(BlueprintImplementableEvent, BlueprintCallable) - call 같이 사용
 
 BlueprintNativeEvent 부모에서 만들고 자식놈이 재정의 가능( C++ , 블프)
+
+메소드(기능)
 ㄴ addcalltoParntFunction
 
 선언만 하고 구현은 따로 UFUNCTION();
@@ -105,3 +107,16 @@ void ABP_player::Tick(float DeltaTime)
 }
 
 };
+
+///-/----//-/--/--/--/--/- 오후 시간
+
+ctrl k c 주석
+ctrl k u 주석해제
+
+input binding action axis 차이 action은 안눌러도 값 들어감 axis 은 눌러야 값 들어감
+
+지역변수랑 필드(맴버)면수 다르게 해야함 _ 언리얼 특 : C4458 에러
+
+포인터 -> 원본이 넘어옴
+
+입력 바인딩(액션, axis 두 가지 있음)으로 처리 

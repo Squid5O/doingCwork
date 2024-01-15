@@ -32,4 +32,14 @@ public:
 	//  category 로 언리얼내 구분 가능. 
 	float speed = 500;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVar")
+	float h ;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVar")
+	float v; //필드 변수
+
+public : 
+	// 입력에 대한 함수(콜백)를 선언하고 싶다.
+	void OnMyAxisHorizontal(float value);
+	void OnMyAxisVertical(float value);
 };
