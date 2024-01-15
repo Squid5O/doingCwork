@@ -39,4 +39,21 @@ public:
 	bool isOK = true;
 	UPROPERTY(EditAnyWhere)
 	FString myName = TEXT("ohjaweng");
+
+public:    //private 도 가능 _ 리플렉션
+	//함수 선언(Declare)
+	UFUNCTION(BlueprintCallable)
+	 int32 MyAdd(int32 a, int32 b);
+
+	 UFUNCTION(BlueprintPure)
+	 int32 MyAddPure(int32 a, int32 b);
+
+	 UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	 int32 MyAddBP(int32 a, int32 b);
+
+	 UFUNCTION(BlueprintNativeEvent, BlueprintCallable) // C++ , 블프 둘다 가능?
+	 int32 MyAddNative(int32 a, int32 b);
 };
+
+
+

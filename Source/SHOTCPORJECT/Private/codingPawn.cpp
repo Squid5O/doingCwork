@@ -72,3 +72,19 @@ void AcodingPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 }
 
+//정의 , 구현
+int32 AcodingPawn::MyAdd(int32 a, int32 b)
+{
+	return a + b;
+}
+
+int32 AcodingPawn::MyAddPure(int32 a, int32 b)
+{
+	return a + b;
+}
+
+int32 AcodingPawn::MyAddNative_Implementation(int32 a, int32 b)
+{
+	return a + b;
+}
+
