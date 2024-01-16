@@ -162,4 +162,5 @@ CDS - CreateDefulatSuboboject
 
 this-지역, world_레벨 물어보자
 
-//1.16 끝
+C++ 에서 블루프린트를 생성 할 수 없어서 bulletFactory 생성
+//1.16 끝 
