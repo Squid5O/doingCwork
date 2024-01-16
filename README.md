@@ -120,3 +120,46 @@ input binding action axis 차이 action은 안눌러도 값 들어감 axis 은 �
 포인터 -> 원본이 넘어옴
 
 입력 바인딩(액션, axis 두 가지 있음)으로 처리 
+
+
+0-----------------\1.16-----------///
+
+코디으이 논리적인 측면
+문제를 해결하기 위해 목록을 만들고 순서대로 논리적으로 하나씩 해결해간다
+사용자의 입력을 받고 그 입력값으로 방향을 만들고 그 방향으로 이동하고 싶다.
+Preudo code(의사코드)
+
+생성자 중요*
+ㄴ 언리얼의 컴포넌트 , add 역활
+
+컴포넌트를 C++에서 쓸때 U를 붙인다
+
+전방선언
+
+액터
+ㄴ 헤더 , ㄴ CPP
+
+RootComponent - C++ attch 할떄
+생성자는 언리얼 시작할때 발동하기에 생성자 수정, 선언 할때는 언리얼 끄고 재시작
+
+#pramaons 헤더가 한번만 실행되게
+
+스마트포인터 _ 아라서 맞춰줌
+
+생성자 작어할때는 언리얼 꺼라.
+
+CreateDefaultSuboject - 언리얼 BP내 컴포넌트 추가 생성자, 계층구조 생각해서 써야함
+
+컴포넌트 배치는 생성자 ATailActor::ATailActor() 에 그 외는 거의 다 begin play
+
+액터 만들떄 코딩 순서도 중하다.
+
+클래스가 자기 자신을 호출할떄 this. !
+
+Generate Visual Sutido poreject files - cpp 솔루션 파일 없을떄 클릭
+
+CDS - CreateDefulatSuboboject
+
+this-지역, world_레벨 물어보자
+
+//1.16 끝
