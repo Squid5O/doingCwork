@@ -19,6 +19,11 @@ AEnemyActor::AEnemyActor()
 	meshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("meshComp"));
 	meshComp->SetupAttachment(RootComponent);  //attach는 필요! 꼭 root일 필요는 없엉
 
+	boxComp->SetGenerateOverlapEvents(true);
+	boxComp->SetCollisionProfileName(TEXT("enemy"));   // SetRootComponent create 한 이후에 쓰지 않으면 null 값에 들어가서 오류뜸
+
+	meshComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
 }
 
 // Called when the game starts or when spawned
@@ -57,5 +62,13 @@ void AEnemyActor::Tick(float DeltaTime)
 	FVector vt = direction * speed * DeltaTime; //방향 * 속력 * 시간
 
 	SetActorLocation(P0 + vt);
+}
+
+void AEnemyActor::NotifyActorBeginOverlap(AActor* OtherActor)
+{
+	//너(OtherActor) 죽고
+	OtherActor->Destroy();
+	 // 나(this )죽자
+	this->Destroy();
 }
 

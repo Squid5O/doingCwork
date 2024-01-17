@@ -23,6 +23,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
+
 public:
 	// PseudoCode :충돌체와 몸을 갖고싶다.
 	// PseudoCode : 태어날 때 방향을 만들고

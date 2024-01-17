@@ -200,3 +200,7 @@ UKismetMathLibrary::RandomIntegerInRange
     ㄴ 서브 쓰레드
  멀티스레드 -일반적으로 하나의 프로세스는 하나의 스레드를 가지고 작업을 수행하게 됩니다.
 하지만 멀티 스레드(multi thread)란 하나의 프로세스 내에서 둘 이상의 스레드가 동시에 작업을 수행하는 것을 의미
+
+오버렙 하나하나 바꾸는건 어려우니 collion -> pj setting - > prest 에서 하나 만들어서 통합적으로 써라
+
+기능- 함수 virtual 찾아라

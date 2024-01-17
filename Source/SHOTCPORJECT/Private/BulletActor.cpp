@@ -19,6 +19,12 @@ ABulletActor::ABulletActor()
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	//몸을 충돌체에 붙이고 싶다. 
 	MeshComp->SetupAttachment(RootComponent);  //boxComp 도 가능
+
+
+	boxComp->SetGenerateOverlapEvents(true);
+	boxComp->SetCollisionProfileName(TEXT("bullet"));
+
+	MeshComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
 // Called when the game starts or when spawned

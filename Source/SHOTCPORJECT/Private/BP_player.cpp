@@ -26,10 +26,29 @@ ABP_player::ABP_player()
 	MeshComp->SetupAttachment(RootComponent); // boxComp 써두됌 (box안에 mesh가 들어가니까)
 	//SetRootComponent() 나 자신을 붙일 때 사용?
 
+
+	//충돌 설정
+	 	boxComp->SetGenerateOverlapEvents(true);
+		boxComp->SetCollisionProfileName(TEXT("player"));
+	 //	boxComp->SetCollisionEnabled(ECollisionEnabled:: QueryAndPhysics);
+
+		//boxComp->SetCollisionObjectType(ECollisionChannel::ECC_EngineTraceChannel1);
+		//boxComp->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+		//boxComp->SetCollisionResponseToChannel(ECollisionChannel::ECC_GameTraceChannel3, ECollisionResponse::ECR_Overlap);
+	
+		// PseudoCode : //몸의 충돌체는 NoCollision 시키고 싶다.'
+		MeshComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+
+
+
+
 	//Arrow컴포넌트를 만들고 
 	firePositon = CreateDefaultSubobject<UArrowComponent>(TEXT("firePositon"));
 	// Root에 붙이고싶다.
 	firePositon->SetupAttachment(RootComponent);
+
+
 }
 
 // Called when the game starts or when spawned
