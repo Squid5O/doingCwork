@@ -164,3 +164,39 @@ this-지역, world_레벨 물어보자
 
 C++ 에서 블루프린트를 생성 할 수 없어서 bulletFactory 생성
 //1.16 끝 
+
+------------------------
+
+1.17 수업
+
+UGameplayStatics::PlaySound2D
+
+사운드 입히기, nullptr= 0 ;
+
+PseudoCode
+// PseudoCode : 
+
+만약 isAutoFIre ture 라면
+시간이 흐르다가 current Time += DeltaSec
+     만약 발사시간이 되면 
+	MakeBUllet 함수를 호출하고 싶다.
+	currentTIme = 0;
+{}
+
+ctrl k d  //  주석정리
+
+블루프린트 - > 메모장 -> 블루프린트 _ 복사 붙여넣기 가능
+
+UKismetMathLibrary::RandomIntegerInRange
+
+멀티쓰레드
+
+쓰레드와 프로세스의 차이/?
+
+쓰레드 = 최신 운영체제의 필수요소 중 하나. 프로세스보다도 작은 실행 흐름의 최소 단위.
+
+프로세스 (OS단)
+ ㄴ 메인 쓰레드 
+    ㄴ 서브 쓰레드
+ 멀티스레드 -일반적으로 하나의 프로세스는 하나의 스레드를 가지고 작업을 수행하게 됩니다.
+하지만 멀티 스레드(multi thread)란 하나의 프로세스 내에서 둘 이상의 스레드가 동시에 작업을 수행하는 것을 의미

@@ -67,4 +67,22 @@ public:
 //	UClass* bulletFactory; // 자동생성해서 팩토리 _ 유클래스 포인터 // 근데 UClass 로 하면 모든 Uclass 상속 액터가 전부 튀어나옴
 	TSubclassOf<class ABulletActor> bulletFactory;  // ABulletActor 상속한 놈만 불러들임
 
+	UPROPERTY(EditAnywhere)
+	class USoundBase* fireSound; // fireSound= nullptr; 생략돼 있음. 값 눠줘야함. = 사운드파일
+
+	//PseudoCode : 자동총쏘기 기능을 만들고 싶다.
+
+	// PseudoCode : 누를때, 텔 때, Tick
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool isAutoFIre;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float currentTime;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float fireTime = 0.1f;
+
+	UFUNCTION(BlueprintCallable)
+	void MakeBullet();
+
 };

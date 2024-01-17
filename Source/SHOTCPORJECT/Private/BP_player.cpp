@@ -6,17 +6,18 @@
 #include "Components/BoxComponent.h"
 #include "Components/ArrowComponent.h"
 #include "BulletActor.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABP_player::ABP_player()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	//boxComp를 생성해서
 	boxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("boxComp"));
 	//boxComp를 루트컴포넌트로 하고싶다.
-	this -> SetRootComponent(boxComp);
+	this->SetRootComponent(boxComp);
 
 
 
@@ -35,7 +36,7 @@ ABP_player::ABP_player()
 void ABP_player::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 // Called every frame
@@ -50,20 +51,41 @@ void ABP_player::Tick(float DeltaTime)
 	//FVector newLoc = P0 + vt;
 	//SetActorLocation(newLoc);   //우측 이동
 
-		//화살표 이동 
-
-	//Pseudo Code(의사코드)
-	//사용자의 입력을 받고	
-	//그 입력값으로 방향을 만들고
-	FVector dir = FVector(0, h, v);
-	dir.Normalize();
-	//그 방향으로 이동하고 싶다.
-	FVector P0 = GetActorLocation();
-//	FVector _v = dir * speed;                  //v 지역변수
-	FVector vt = dir * speed * DeltaTime; // DeltaTime = deltaSecond
-	//FVector newLoc = P0 + vt;
-	SetActorLocation(P0 + vt);
+		//화살표 이동 ? // 좌우위아래이동
+	{
+		//Pseudo Code(의사코드)
+		//사용자의 입력을 받고	
+		//그 입력값으로 방향을 만들고
+		FVector dir = FVector(0, h, v);
+		dir.Normalize();
+		//그 방향으로 이동하고 싶다.
+		FVector P0 = GetActorLocation();
+		//	FVector _v = dir * speed;                  //v 지역변수
+		FVector vt = dir * speed * DeltaTime; // DeltaTime = deltaSecond
+		//FVector newLoc = P0 + vt;
+		SetActorLocation(P0 + vt);
 	}
+
+
+	/*
+	만약 isAutoFIre ture 라면
+	시간이 흐르다가 current Time += DeltaSec
+	 만약 발사시간이 되면
+	MakeBUllet 함수를 호출하고 싶다.
+	currentTIme = 0;
+	*/
+
+	if (isAutoFIre) {  // 0이 아니면 트루
+		//int a = 1
+		//if(a)     true
+		currentTime += DeltaTime;
+		if (currentTime >= fireTime) {
+			MakeBullet();
+			currentTime = 0;
+		}
+	}
+
+}
 
 // Called to bind functionality to input
 void ABP_player::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -75,7 +97,8 @@ void ABP_player::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	PlayerInputComponent->BindAxis(TEXT("Vertical"), this, &ABP_player::OnMyAxisVertical);
 
 	PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this, &ABP_player::OnMyActionFirePressed);
-		
+
+	PlayerInputComponent->BindAction(TEXT("Fire"), IE_Released, this, &ABP_player::OnMyActionFireReleased);
 
 }
 
@@ -90,16 +113,38 @@ void ABP_player::OnMyAxisVertical(float value)
 }
 
 void ABP_player::OnMyActionFirePressed()
-{	
-	FTransform t = firePositon->GetComponentToWorld();
-	// 총알을 만들어서 총귀위치에 배치하고 싶다.
-	//GetWorld()->SpawnActor(ABulletActor::GetClass()) // (ABulletActor::GetClass() _ Uclass를 가져옴 전부 다 C++로 할때
-	GetWorld()->SpawnActor<ABulletActor>(bulletFactory, t);
+{
+	/*
+		//PseudoCode :총소리를 내고 싶다,
+		UGameplayStatics::PlaySound2D(GetWorld(), fireSound);
 
+		FTransform t = firePositon->GetComponentToWorld();
+		// 총알을 만들어서 총귀위치에 배치하고 싶다.
+		//GetWorld()->SpawnActor(ABulletActor::GetClass()) // (ABulletActor::GetClass() _ Uclass를 가져옴 전부 다 C++로 할때
+		GetWorld()->SpawnActor<ABulletActor>(bulletFactory, t);
+
+
+	*/
+
+	isAutoFIre = true;
+	MakeBullet();
 }
 
 void ABP_player::OnMyActionFireReleased()
 {
+	isAutoFIre = false;
+	currentTime = 0;
+}
+
+void ABP_player::MakeBullet()
+{
+
+	//PseudoCode :총소리를 내고 싶다,
+	UGameplayStatics::PlaySound2D(GetWorld(), fireSound);
+
+	FTransform t = firePositon->GetComponentToWorld();
+	//PseudoCode :총알을 만들어서 총구위치에 배치하고 싶다.
+	GetWorld()->SpawnActor<ABulletActor>(bulletFactory, t);
 
 }
 
