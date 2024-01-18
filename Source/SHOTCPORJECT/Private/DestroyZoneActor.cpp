@@ -14,7 +14,7 @@ ADestroyZoneActor::ADestroyZoneActor()
 	boxComp2 = CreateDefaultSubobject<UBoxComponent>(TEXT("boxComp2")); // h 에 작성한거 가져오기
 	SetRootComponent(boxComp2);
 	// PseudoCode : 박스 사이즈는 1미터로!
-	boxComp2->SetBoxExtent(FVector(0.5f));
+	boxComp2->SetBoxExtent(FVector(50));
 	boxComp2->SetGenerateOverlapEvents(true);
 	boxComp2->SetCollisionProfileName(TEXT("destroy"));
 

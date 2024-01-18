@@ -244,3 +244,15 @@ LogSelectionDetails: Warning: NavigateToFunctionSource:  Unable to find source f
 LogSelectionDetails: Warning: NavigateToFunctionSource:  Unable to find source file and line number for 'UGameplayStatics::PlaySound2D' [지정된 모듈을 찾을 수 없습니다.] 
 
 <> = 탬플릿
+
+
+----------------destry zone 까지가 프로토타입- 필기시험암기범위
+
+1.18오후
+팩토리 - 파일을 로드! 카피카피카피
+
+전방선언
+
+오늘 한 내용까지 만들어라. 2월 1일 시험(실시, 지필 둘다)
+
+CDO 랑 OP(오브젝트풀) 는 비슷하면서다르다.
