@@ -79,6 +79,7 @@ CDO(클래스의 기본 객채) - 메모리카피? - 하나하나 만들면 빡�
 클래스 생성할때 - 생성자 함수 ( 디폴트 오브젝트 만 씀 _ 나머지는 메모리 카피) - 초기화?
 ㄴ 처음 한번 생성할때 만듬.(생성자)
 
+
 생성자는 엔진이 실행횔떄 호출됨. -> 초기화 ->  이를 통해 CDO가 만들어짐
 
 
@@ -204,3 +205,42 @@ UKismetMathLibrary::RandomIntegerInRange
 오버렙 하나하나 바꾸는건 어려우니 collion -> pj setting - > prest 에서 하나 만들어서 통합적으로 써라
 
 기능- 함수 virtual 찾아라
+
+
+
+---1--.18
+
+언리얼 엔진
+물리엔진 API
+
+노드 = 함수
+
+Scene Compenet ? 
+Actor Component
+
+boxcomp begin overlap 잘 쓴당  
+ ㄴ sweap reuslt : impact point _ 특정 부분으로 대미지
+
+법선 백터(노멀) _ 어떤 면의 수직인 벡터
+
+Phys Mat(tiral)
+
+F12 - 정의 찾기? ctrl 이랑 뭐가다름?
+
+DECLARE_DYNAMIC_MULTICAST_SPARSE_DELEGATE_SixParams( FComponentBeginOverlapSignature, UPrimitiveComponent, OnComponentBeginOverlap, 
+UPrimitiveComponent*, OverlappedComponent, AActor*, OtherActor, UPrimitiveComponent*, OtherComp, int32, OtherBodyIndex, bool, bFromSweep, const FHitResult &, SweepResult);
+/** Delegate for notification of end of overlap with a specific component */
+
+void OnMyCompBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+자바 리스너 = C++ 델리게이터
+
+AddDynamic - 자동 완성 안됌
+
+spawn emiiter _ 폭발 처리 (캣캐이드)
+캐스캐이드 _ 나이가라라 2개 있음
+
+LogSelectionDetails: Warning: NavigateToFunctionSource:  Unable to find source file and line number for 'UGameplayStatics::SpawnEmitterAtLocation' [지정된 모듈을 찾을 수 없습니다.]
+LogSelectionDetails: Warning: NavigateToFunctionSource:  Unable to find source file and line number for 'UGameplayStatics::PlaySound2D' [지정된 모듈을 찾을 수 없습니다.] 
+
+<> = 탬플릿

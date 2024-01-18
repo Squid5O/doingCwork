@@ -25,6 +25,17 @@ public:
 
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 
+	UFUNCTION()
+	void OnMyCompBeginOverLap(
+		UPrimitiveComponent* OnComponentBeginOverlap, 
+		AActor* OtherActor, 
+		UPrimitiveComponent* OtherComp, 
+		int32 OtherBodyIndex,
+		bool bFromSweep, 
+		const FHitResult& SweepResult);
+
+	/** Delegate for notification of end of overlap with a specific component */
+
 public:
 	// PseudoCode :충돌체와 몸을 갖고싶다.
 	// PseudoCode : 태어날 때 방향을 만들고
@@ -48,5 +59,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)    //actor
 	AActor* target;
+
+	// PseudoCode :플레이어와 부딪히면 폭발 소리를 내고 싶다. 폭팔 이펙트도 생성해서 배치하고 싶다.
+	UPROPERTY(EditAnywhere)
+	class USoundBase* expSFX;
+
+		UPROPERTY(EditAnywhere)
+	class UParticleSystem* expVFX;
 
 };

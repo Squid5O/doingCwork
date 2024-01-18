@@ -4,6 +4,8 @@
 #include "BulletActor.h"
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "EnemyActor.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABulletActor::ABulletActor()
@@ -31,7 +33,7 @@ ABulletActor::ABulletActor()
 void ABulletActor::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	boxComp->OnComponentBeginOverlap.AddDynamic(this, &ABulletActor::OnMyCompBeginOverLap);
 }
 
 // Called every frame
@@ -44,5 +46,19 @@ void ABulletActor::Tick(float DeltaTime)
 	FVector vt = dir * speed * GetWorld()->GetDeltaSeconds();  //DeltaTime 대신 사용 가능. GetWorld()->GetDeltaSeconds(); 
 
 	SetActorLocation(P0 + vt);
+}
+
+void ABulletActor::OnMyCompBeginOverLap(UPrimitiveComponent* OnComponentBeginOverlap, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	//ABP_player* player = Cast<ABP_player>(OtherActor);
+	if (OtherActor->IsA<AEnemyActor>())   // isA 아더액터가 player라면~
+	{
+		UGameplayStatics::PlaySound2D(GetWorld(), expSFX2);
+
+		OtherActor->Destroy();
+		//너 죽고 나 죽자
+		this->Destroy();
+	}
+
 }
 

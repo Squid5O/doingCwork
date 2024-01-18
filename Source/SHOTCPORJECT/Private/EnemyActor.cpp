@@ -5,6 +5,7 @@
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "BP_player.h"
 
 // Sets default values
 AEnemyActor::AEnemyActor()
@@ -30,6 +31,10 @@ AEnemyActor::AEnemyActor()
 void AEnemyActor::BeginPlay()
 {
 	Super::BeginPlay();
+
+
+	// PseudoCode : 박스컴포넌트의 충동을 감지하고 싶다. 
+	boxComp->OnComponentBeginOverlap.AddDynamic(this, &AEnemyActor::OnMyCompBeginOverLap); // 이거 불러서 박스 컴프 오버랩에 적용시켜줘
 
 
 
@@ -67,8 +72,36 @@ void AEnemyActor::Tick(float DeltaTime)
 void AEnemyActor::NotifyActorBeginOverlap(AActor* OtherActor)
 {
 	//너(OtherActor) 죽고
-	OtherActor->Destroy();
+	//OtherActor->Destroy();
 	 // 나(this )죽자
-	this->Destroy();
+	;
+	//GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Green, TEXT("AAAAAAA"));
+}
+
+
+void AEnemyActor::OnMyCompBeginOverLap(
+	UPrimitiveComponent* OnComponentBeginOverlap,
+	AActor* OtherActor,
+	UPrimitiveComponent* OtherComp,
+	int32 OtherBodyIndex,
+	bool bFromSweep,
+	const FHitResult& SweepResult)
+{
+	//GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Green, TEXT("AAAAAAA")); // -1 은 무시하셈 , 문자만 출력
+	GEngine->AddOnScreenDebugMessage(-1, 9, FColor::Green, FString::Printf(TEXT("OnMyCompBeginOverlap :: %s"), *OtherActor->GetName()));  //숫자 출력 
+	//OtherActor->Destroy();
+//	ABP_player* player = Cast<ABP_player>(OtherActor); 둘중 하나 쓰셈
+	if (OtherActor->IsA<ABP_player>())   // isA 아더액터가 player라면~
+	{
+
+		// PseudoCode : 죽이기 전에 폭팔 소리 내버리쟈
+		UGameplayStatics::PlaySound2D(GetWorld(), expSFX);
+	// PseudoCode : 폭팔 VFX를 생성해서 배치
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), expVFX, GetActorLocation());
+
+		OtherActor->Destroy();
+		//너 죽고 나 죽자
+		this->Destroy();
+	}
 }
 
