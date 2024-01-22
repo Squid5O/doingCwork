@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
+#include "BP_playerBase.h"
 #include "BulletActor.h"
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
@@ -53,6 +54,17 @@ void ABulletActor::OnMyCompBeginOverLap(UPrimitiveComponent* OnComponentBeginOve
 	//ABP_player* player = Cast<ABP_player>(OtherActor);
 	if (OtherActor->IsA<AEnemyActor>())   // isA 아더액터가 player라면~
 	{
+		//점수를 1점 추가 하고 싶다.
+	//	auto gm = Cast<ABP_playerBase>(GetWorld()->GetAuthGameMode());  // 오토(자동)도 가능.
+		ABP_playerBase* gm = Cast<ABP_playerBase>(GetWorld()->GetAuthGameMode()); //원본 써야 해서 포인터
+		if (gm)
+		{
+			gm->AddScore(1);
+		}
+
+
+		//폭팔 소리를 내고 싶다.
+
 		UGameplayStatics::PlaySound2D(GetWorld(), expSFX2);
 
 		OtherActor->Destroy();

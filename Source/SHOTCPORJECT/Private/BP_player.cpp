@@ -18,6 +18,7 @@ ABP_player::ABP_player()
 	boxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("boxComp"));
 	//boxComp를 루트컴포넌트로 하고싶다.
 	this->SetRootComponent(boxComp);
+	boxComp->SetBoxExtent(FVector(50.0f));
 
 
 
@@ -25,6 +26,18 @@ ABP_player::ABP_player()
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	MeshComp->SetupAttachment(RootComponent); // boxComp 써두됌 (box안에 mesh가 들어가니까)
 	//SetRootComponent() 나 자신을 붙일 때 사용?
+
+	// - PseudoCode : mesh의 StaticMesh 파일을 로드하고 싶다,
+	ConstructorHelpers::FObjectFinder<UStaticMesh> 
+		tempMesh(TEXT("/Script/Engine.StaticMesh'/Game/model/Drone/Drone_low.Drone_low'"));
+	// - PseudoCode : 로드를 성공했다면
+	if (tempMesh.Succeeded()) {
+		// - PseudoCode : meshComp의 StaticMesh를 로드한 것으로 지정하고 싶다.
+		MeshComp->SetStaticMesh(tempMesh.Object);
+		// mesh의 Trnasform을 설정하고 싶다.
+		MeshComp->SetRelativeRotation(FRotator(0, 90, 90));
+		MeshComp->SetRelativeScale3D(FVector(1.3f));
+	}
 
 
 	//충돌 설정
@@ -56,6 +69,11 @@ void ABP_player::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// - PseudoCode : 마우스 커서를 보이지 않게 하고 싶다.
+	// 입력모드를 게임으로 하고 싶다.
+	auto controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	controller->SetShowMouseCursor(false);
+	controller->SetInputMode(FInputModeGameOnly());
 }
 
 // Called every frame

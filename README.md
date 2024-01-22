@@ -256,3 +256,48 @@ LogSelectionDetails: Warning: NavigateToFunctionSource:  Unable to find source f
 오늘 한 내용까지 만들어라. 2월 1일 시험(실시, 지필 둘다)
 
 CDO 랑 OP(오브젝트풀) 는 비슷하면서다르다.
+
+
+---------------------------------
+1.22 수업
+
+레벨에 태어날 수 있는것 = 액터 , 폰, 캐릭터   <-> 컴포넌트는 안돼!
+
+back face culling? - 삼각자 후면 제거
+
+알파값이 없다면 opacity 안해도됌
+
+auto Expousre 꺼주샘- 점점 화면 밝아짐 - 3D필요, 2D 불필요
+
+0~1 인 값을 반전시키고 싶다.
+float = 0.2f;
+a = 1.0f - a;      => 1-x
+
+binormal, tangetn normal - 미래에 중요
+
+componet 컴포넌트 = 클래스 <-> mesh (이미지)
+StaticMeshCompoent 와 Mesh는 다른거임 
+
+ConstructorHelpers 생성자 단계에서만 사용 가능.
+
+FObjectFinder C++ 찾기, UObject 블루프린트 찾기?
+
+/Script/Engine.StaticMesh'/Game/model/Drone/Drone_low.Drone_low'
+ㄴcopyRefence
+
+오우너(owner) = 액터 (다른것도 가능한데 거의 액터)
+
+has a() , is a(상솎)
+
+parnt class -> child actor ( is a)
+actor -> componet (has a)
+
+outer? <-> owner?
+
+nullptr!= -> true  => 빼고 변수만 써도 됌
+
+auto 가끔 포인터 씹음
+
+shitft ART S - 토마토 클래스, 함수, 변수 검색
+
+댕글링 포인터

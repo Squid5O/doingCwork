@@ -37,6 +37,11 @@ void AEnemyMangerActor::Tick(float DeltaTime)
 
 void AEnemyMangerActor::MakeEnemy()
 {
+	// PseudoCode : 만약 플레이어가 없으면 함수를 바로 종료하고 싶다.
+	//if (!GetWorld()->GetFirstPlayerController()->GetPawn()) {
+	if (nullptr == GetWorld()->GetFirstPlayerController()->GetPawn()) {
+		return;
+	}
 	GetWorld()->SpawnActor<AEnemyActor>(enemyFactory, arrowComp->GetComponentTransform());
 }
 
