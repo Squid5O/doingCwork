@@ -6,6 +6,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "BP_player.h"
+#include "GameOverWidget.h"
 
 // Sets default values
 AEnemyActor::AEnemyActor()
@@ -93,6 +94,16 @@ void AEnemyActor::OnMyCompBeginOverLap(
 //	ABP_player* player = Cast<ABP_player>(OtherActor); 둘중 하나 쓰셈
 	if (OtherActor->IsA<ABP_player>())   // isA 아더액터가 player라면~
 	{
+		
+		
+		// - PseudoCode : 게임어보 UI를 생성해서 화면에 보이게 하고 싶다.
+		auto gameOverUi = CreateWidget<UGameOverWidget>(GetWorld(), gameOverUIFactory);
+		gameOverUi->AddToViewport(0);
+		// - PseudoCode : 마우스 커서를 보이게 하고 입력모드를 UI로 하고 싶다.
+		auto controller = GetWorld()->GetFirstPlayerController();
+		controller->SetShowMouseCursor(true);
+		controller->SetInputMode(FInputModeGameOnly());
+
 
 		// PseudoCode : 죽이기 전에 폭팔 소리 내버리쟈
 		UGameplayStatics::PlaySound2D(GetWorld(), expSFX);

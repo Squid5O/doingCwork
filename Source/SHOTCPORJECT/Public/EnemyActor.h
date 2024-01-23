@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameOverWidget.h"
 #include "EnemyActor.generated.h"
 
 UCLASS()
@@ -64,7 +65,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	class USoundBase* expSFX;
 
-		UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere)
 	class UParticleSystem* expVFX;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UGameOverWidget> gameOverUIFactory;
 };
